@@ -41,7 +41,7 @@ stemmer = nltk.stem.porter.PorterStemmer()
 # bigram_measures = nltk.collocations.BigramAssocMeasures()
 # trigram_measures = nltk.collocations.TrigramAssocMeasures()
 # finder = BigramCollocationFinder.from_words(
-#     nltk.corpus.genesis.words('coffee.txt')
+#     nltk.corpus.genesis.words('')
 # finder.apply_freq_filter(2)
 # finder.nbest(bigram_measures.pmi, 10)
 
