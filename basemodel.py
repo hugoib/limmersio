@@ -18,7 +18,7 @@ import timeit
 
 
 #read from txt file
-with open('coffee.txt', 'r') as myfile:
+with open('data/coffee.txt', 'r') as myfile:
   txt = myfile.read().replace('\n', '')
 
 
@@ -69,7 +69,7 @@ print('Translated nouns:', translated_nouns)
 print('*********************************************************************')
 
 #create word-label dictionary
-df = pd.read_csv('en_50k.csv', sep = ',', encoding= 'utf8')
+df = pd.read_csv('data/en_50k.csv', sep = ',', encoding= 'utf8')
 #print('word frequency dataset:',df.head())
 label = [0]*10000+[1]*20000+[2]*20000
 df['label'] = label
