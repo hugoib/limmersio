@@ -2,3 +2,5 @@ pandas
 nltk
 textblob
 googletrans
+Flask
+Flask-RESTful
