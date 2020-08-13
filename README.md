@@ -19,12 +19,20 @@ Project is created with:
 ## Setup
 To run this project:
 
-### Backend
+### Engine - Terminal mode
 
 ```
 $ cd backend
 $ make setup-env
-$ make run
+$ make run-model
+```
+
+### Backend 
+
+```
+$ cd backend
+$ make setup-env
+$ make run-backend
 ```
 
 ### Frontend
