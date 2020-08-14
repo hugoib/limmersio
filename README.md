@@ -39,6 +39,6 @@ $ make run-backend
 
 ```
 $ cd frontend
-$ npm install
-$ ng serve
+$ make setup-env
+$ make run
 ```

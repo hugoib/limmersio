@@ -4,8 +4,8 @@ setup-env:
 	pip install -r requirements.txt
 	python -m textblob.download_corpora
 
-make run-model:
+run-model:
 	python basemodel.py 
 
-make run-backend:
+run-backend:
 	python api.py
