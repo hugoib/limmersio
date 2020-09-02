@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-
     this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
       console.log(data);
       this.limmersifiedText = data;

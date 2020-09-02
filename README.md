@@ -15,6 +15,7 @@ Project is created with:
 * nltk
 * textblob
 * googletrans
+* https://github.com/angular/flex-layout
 	
 ## Setup
 To run this project:
