@@ -4,36 +4,36 @@
 </head>
 <body>
   <div class="bounds">
-    <div fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <div fxFlex="80" class="sec1">
+    <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="2%">
+      <div fxFlex="80">
         <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
-          <div fxFlex="50" class="sec1">
-
-
+          <div fxFlex="50">
             <mat-card class="example-card">
-                <mat-card-header></mat-card-header>
+                <mat-card-header>Text to limmersify</mat-card-header>
+                <br>
                 <mat-card-content>
-
-                    <mat-form-field class="example-form-field">
-                        <mat-label>Clearable input</mat-label>
-                        <input matInput type="text" [(ngModel)]="value">
-                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                          <mat-icon>close</mat-icon>
-                        </button>
-                      </mat-form-field>
-
+                  <mat-form-field appearance="fill" class="input-text">
+                    <mat-label>Insert your text here:</mat-label>
+                    <textarea matInput></textarea>
+                  </mat-form-field>
                 </mat-card-content>
               </mat-card>
-          
-        
-              
         </div>
-          <div fxFlex="50" class="sec3">
-            third-section
+          <div fxFlex="50">
+            <mat-card class="example-card">
+              <mat-card-header>Output text</mat-card-header>
+              <br>
+              <mat-card-content>
+                <mat-form-field appearance="fill" class="input-text">
+                  <mat-label></mat-label>
+                  <textarea matInput></textarea>
+                </mat-form-field>
+              </mat-card-content>
+            </mat-card>            
           </div>
         </div>
       </div>
-      <div fxFlex="20" class="sec2" >
+      <div fxFlex="20" class="button-area" fxLayoutGap="2%">
         <button mat-raised-button>Clear</button>  
         <button mat-raised-button>Limmersify text!</button>  
       </div>
