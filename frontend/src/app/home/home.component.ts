@@ -14,11 +14,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private dataService: DataService) { }
 
+  value = 'Clear me';
+
   ngOnInit() {
-    this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
-      console.log(data);
-      this.limmersifiedText = data;
-    })  
+    // this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
+    // console.log(data);
+    //  this.limmersifiedText = data;
+    // })
   }
   ngOnDestroy() {
     this.destroy$.next(true);
