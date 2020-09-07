@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../data.service';
-import {  takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -14,13 +14,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private dataService: DataService) { }
 
-  value = 'Clear me';
+  inputText = '';
+  outputText = '';
+  spinnerWait: boolean;
 
   ngOnInit() {
-    // this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[])=>{
-    // console.log(data);
-    //  this.limmersifiedText = data;
-    // })
   }
   ngOnDestroy() {
     this.destroy$.next(true);
@@ -28,4 +26,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  public clear() {
+    this.inputText = '';
+    this.outputText = '';
+  }
+
+  public limmersify() {
+    this.spinnerWait = true;
+
+    this.dataService.sendGetRequest(this.inputText).pipe(takeUntil(this.destroy$)).subscribe(data => {
+      this.spinnerWait = false;
+      console.log(data);
+      this.outputText = String(data.body);
+    },
+      error => {
+        this.spinnerWait = false;
+      });
+  }
 }

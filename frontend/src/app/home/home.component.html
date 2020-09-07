@@ -14,11 +14,19 @@
                 <mat-card-content>
                   <mat-form-field appearance="fill" class="input-text">
                     <mat-label>Insert your text here:</mat-label>
-                    <textarea matInput></textarea>
+                    <textarea matInput [(ngModel)]="inputText">{{inputText}}</textarea>
                   </mat-form-field>
                 </mat-card-content>
               </mat-card>
         </div>
+
+        <div class="overlay" *ngIf="spinnerWait">
+          <div class="centerSpinner">
+              <mat-progress-spinner class="custom-spinner" mode="indeterminate" style="margin:0 auto;" *ngIf="spinnerWait">
+              </mat-progress-spinner>
+          </div>
+      </div>
+
           <div fxFlex="50">
             <mat-card class="example-card">
               <mat-card-header>Output text</mat-card-header>
@@ -26,7 +34,7 @@
               <mat-card-content>
                 <mat-form-field appearance="fill" class="input-text">
                   <mat-label></mat-label>
-                  <textarea matInput></textarea>
+                  <textarea matInput [(ngModel)]="outputText">{{outputText}}</textarea>
                 </mat-form-field>
               </mat-card-content>
             </mat-card>            
@@ -34,8 +42,8 @@
         </div>
       </div>
       <div fxFlex="20" class="button-area" fxLayoutGap="2%">
-        <button mat-raised-button>Clear</button>  
-        <button mat-raised-button>Limmersify text!</button>  
+        <button mat-raised-button  (click) ="clear()" >Clear</button>  
+        <button mat-raised-button  (click) ="limmersify()" >Limmersify text!</button>  
       </div>
     </div>
   </div>
