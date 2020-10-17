@@ -41,5 +41,5 @@ $ make run-backend
 ```
 $ cd frontend
 $ make setup-env
-$ make run
+$ make run-frontend
 ```

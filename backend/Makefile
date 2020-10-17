@@ -3,6 +3,7 @@ setup-env:
 	pipenv install
 	pip install -r requirements.txt
 	python -m textblob.download_corpora
+	pip install -U flask-cors
 
 run-model:
 	python basemodel.py 
