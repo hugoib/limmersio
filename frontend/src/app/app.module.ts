@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
+
 @NgModule({
   declarations: [
     AppComponent,

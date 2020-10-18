@@ -32,13 +32,10 @@
 
           <div fxFlex="50">
             <mat-card class="example-card">
-              <mat-card-header>Output text</mat-card-header>
+              <mat-card-header>Output text:</mat-card-header>
               <br>
               <mat-card-content>
-                <mat-form-field appearance="fill" class="input-text">
-                  <mat-label>You limmersified text will be here:</mat-label>
-                  <textarea class="text-area" matInput [(ngModel)]="outputText">{{outputText}}</textarea>
-                </mat-form-field>
+                <div [innerHtml]="getHtml(outputText)"></div>
               </mat-card-content>
             </mat-card>            
           </div>

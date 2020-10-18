@@ -41,3 +41,8 @@
 .text-area{
   height:200px;
 }
+
+:host ::ng-deep .translated-word{
+  color: red !important;;
+  font-weight: bold !important;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../data.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,14 @@ import { Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  outputText = '';
   limmersifiedText: any[];
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private domSanitizer: DomSanitizer) { }
+
 
   inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';
-  outputText = '';
+  
   selectedLevelSlider = 1;
   spinnerWait: boolean;
 
@@ -34,13 +37,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public formJSON() {
     const level = ['a', 'b', 'c'];
+    // Clean forbidden JSON characters
+
+    const text = this.inputText;
+    var new_text = ""; 
+    for( var i = 0; i < text.length; i++ ){
+      if( !(text[i] == '\n' || text[i] == '\r') ){
+        new_text += text[i]; 
+      }
+    }
+
     const data = '{ ' +
-        '"text": "' + this.inputText + '", ' +
+        '"text": "' + new_text.replace(/[!@#$^&%*()+=[\]/{}|:<>?,.\\-]/g, '') + '", ' +
         '"level":  "' + level[this.selectedLevelSlider - 1 ] +
          '"}';
     const paramsJSON = JSON.parse(data);
     console.log(paramsJSON);
     return paramsJSON;
+}
+
+getHtml(html){
+  return this.domSanitizer.bypassSecurityTrustHtml(html);
 }
 
   public limmersify() {
