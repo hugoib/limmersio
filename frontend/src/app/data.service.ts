@@ -26,11 +26,11 @@ export class DataService {
     return throwError(errorMessage);
   }
 
-  public sendGetRequest(inputText) {
+  public sendGetRequest(request) {
     return this.httpClient.get(this.REST_API_SERVER, {
       params: {
-        text: inputText,
-        level: 'begginer',
+        text: request.text,
+        level: request.level,
         'Access-Control-Allow-Origin': '*'
       },
       observe: 'response'

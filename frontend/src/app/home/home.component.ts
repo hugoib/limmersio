@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private dataService: DataService) { }
 
-  inputText = '';
+  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';
   outputText = '';
   spinnerWait: boolean;
 
@@ -27,14 +27,26 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public clear() {
-    this.inputText = '';
+    this.inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species';
     this.outputText = '';
   }
+
+  public formJSON() {
+    var data = '{ ' +
+        '"text": "' + this.inputText + '", ' +
+        '"level":  "' + 'a' +
+         '"}';
+    var paramsJSON = JSON.parse(data);
+    console.log(paramsJSON)
+    return paramsJSON;
+}
 
   public limmersify() {
     this.spinnerWait = true;
 
-    this.dataService.sendGetRequest(this.inputText).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    var requestBody = this.formJSON();
+
+    this.dataService.sendGetRequest(requestBody).pipe(takeUntil(this.destroy$)).subscribe(data => {
       this.spinnerWait = false;
       console.log(data);
       this.outputText = String(data.body);
