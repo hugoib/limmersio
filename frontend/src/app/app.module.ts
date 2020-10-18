@@ -16,7 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-
+import {MatSliderModule} from '@angular/material/slider';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
@@ -38,7 +38,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     FlexLayoutModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

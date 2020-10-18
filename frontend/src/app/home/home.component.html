@@ -14,8 +14,11 @@
                 <mat-card-content>
                   <mat-form-field appearance="fill" class="input-text">
                     <mat-label>Insert your text here:</mat-label>
-                    <textarea matInput [(ngModel)]="inputText">{{inputText}}</textarea>
+                    <textarea class="text-area" matInput [(ngModel)]="inputText">{{inputText}}</textarea>
                   </mat-form-field>
+                  <mat-label>Select your language level: (1: Basic, 2: Intermediate, 3: Advanced)</mat-label>
+                  <mat-slider class="example-margin" [max]="3" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="selectedLevelSlider">
+                  </mat-slider>
                 </mat-card-content>
               </mat-card>
         </div>
@@ -33,8 +36,8 @@
               <br>
               <mat-card-content>
                 <mat-form-field appearance="fill" class="input-text">
-                  <mat-label></mat-label>
-                  <textarea matInput [(ngModel)]="outputText">{{outputText}}</textarea>
+                  <mat-label>You limmersified text will be here:</mat-label>
+                  <textarea class="text-area" matInput [(ngModel)]="outputText">{{outputText}}</textarea>
                 </mat-form-field>
               </mat-card-content>
             </mat-card>            

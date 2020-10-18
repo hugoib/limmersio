@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';
   outputText = '';
+  selectedLevelSlider = 1;
   spinnerWait: boolean;
 
   ngOnInit() {
@@ -27,32 +28,38 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public clear() {
-    this.inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species';
+    this.inputText = '';
     this.outputText = '';
   }
 
   public formJSON() {
-    var data = '{ ' +
+    const level = ['a', 'b', 'c'];
+    const data = '{ ' +
         '"text": "' + this.inputText + '", ' +
-        '"level":  "' + 'a' +
+        '"level":  "' + level[this.selectedLevelSlider - 1 ] +
          '"}';
-    var paramsJSON = JSON.parse(data);
-    console.log(paramsJSON)
+    const paramsJSON = JSON.parse(data);
+    console.log(paramsJSON);
     return paramsJSON;
 }
 
   public limmersify() {
     this.spinnerWait = true;
 
-    var requestBody = this.formJSON();
-
-    this.dataService.sendGetRequest(requestBody).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      this.spinnerWait = false;
-      console.log(data);
-      this.outputText = String(data.body);
-    },
-      error => {
+    const requestBody = this.formJSON();
+    if (this.inputText !== ''){
+      this.dataService.sendGetRequest(requestBody).pipe(takeUntil(this.destroy$)).subscribe(data => {
         this.spinnerWait = false;
-      });
+        console.log(data);
+        this.outputText = String(data.body);
+      },
+        error => {
+          this.spinnerWait = false;
+        });
+    }
+    else{
+      this.spinnerWait = false;
+      alert('Please insert text.');
+    }
   }
 }
