@@ -17,9 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService, private domSanitizer: DomSanitizer) { }
 
 
-  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';
-  
-  selectedLevelSlider = 1;
+  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';  selectedLevelSlider = 1;
   spinnerWait: boolean;
 
   ngOnInit() {
@@ -40,15 +38,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Clean forbidden JSON characters
 
     const text = this.inputText;
-    var new_text = ""; 
-    for( var i = 0; i < text.length; i++ ){
-      if( !(text[i] == '\n' || text[i] == '\r') ){
-        new_text += text[i]; 
+    let newText = '';
+    // tslint:disable-next-line: prefer-for-of
+    for ( let i = 0; i < text.length; i++ ){
+      if ( !(text[i] === '\n' || text[i] === '\r') ){
+        newText += text[i];
       }
     }
 
     const data = '{ ' +
-        '"text": "' + new_text.replace(/[!@#$^&%*()+=[\]/{}|:<>?,.\\-]/g, '') + '", ' +
+        '"text": "' + newText.replace(/[!@#$^&%*()+=[\]/{}|:<>?,.\\-]/g, '') + '", ' +
         '"level":  "' + level[this.selectedLevelSlider - 1 ] +
          '"}';
     const paramsJSON = JSON.parse(data);
