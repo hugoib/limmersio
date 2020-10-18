@@ -3,7 +3,6 @@ from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS, cross_origin
 from engine import main
 import argparse
-import json #for tests
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -34,7 +33,7 @@ class LimmersioEngine(Resource):
 api.add_resource(LimmersioEngine, '/limmersify/')
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(host="0.0.0.0", debug=True)
   
 
 

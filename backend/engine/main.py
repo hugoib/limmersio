@@ -104,7 +104,7 @@ def limmersify_by_level(level, translator, text, phrases, levelA, levelB, levelC
         bold_A = []
         for w in selected_A:
             temp = translator.translate(w, src='en', dest='de').text
-            bold_A.append("^%" + temp + "^%")
+            bold_A.append("<span class='translated-word'>" + temp + "</span>")
 
         dictA= {k:v for k,v in zip(selected_A, bold_A)}
         final_text = replace_all(text, dictA)
@@ -117,7 +117,7 @@ def limmersify_by_level(level, translator, text, phrases, levelA, levelB, levelC
         bold_B = []
         for w in selected_B:
             temp = translator.translate(w, src='en', dest='de').text
-            bold_B.append("^%" + temp + "^%")
+            bold_B.append("<span class='translated-word'>" + temp + "</span>")
 
         dictB= {k:v for k,v in zip(selected_B, bold_B)}
         final_text = replace_all(text, dictB)
@@ -130,7 +130,7 @@ def limmersify_by_level(level, translator, text, phrases, levelA, levelB, levelC
         bold_C = []
         for w in selected_C:
             temp = translator.translate(w, src='en', dest='de').text
-            bold_C.append("^%" + temp + "^%")
+            bold_C.append("<span class='translated-word'>" + temp + "</span>")
 
         dictC = {k:v for k,v in zip(selected_C, bold_C)}
         final_text = replace_all(text, dictC)
