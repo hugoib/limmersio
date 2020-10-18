@@ -7,7 +7,6 @@ import nltk
 import random
 import re
 from nltk.collocations import *
-#import timeit
 import time
 
 def limmersify(args):
@@ -56,7 +55,9 @@ def extract_all_nouns_from_remaining_corpus(translator, phrases, txt):
     return nouns
 
 def create_word_label_dic():
-    word_label_dic = pd.read_csv("backend/data/en_50k.csv", sep = ',', encoding= 'utf8')
+    import sys
+    print(sys.path)
+    word_label_dic = pd.read_csv("data/en_50k.csv", sep = ',', encoding= 'utf8')
     label = [0]*10000+[1]*20000+[2]*20000
     word_label_dic['label'] = label
     word_dict = dict(zip(word_label_dic.word, word_label_dic.label))

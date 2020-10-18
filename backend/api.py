@@ -3,35 +3,39 @@ from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS, cross_origin
 from engine import main
 import argparse
+import json #for tests
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 api = Api(app)
 
 parser = reqparse.RequestParser()
-parser_argument = argparse.ArgumentParser()
 
-parser_argument.add_argument('--text', default="Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. When coffee berries turn from green to bright red in color indicating ripeness they are picked, processed, and dried. Dried coffee seeds are roasted to varying degrees, depending on the desired flavor. Roasted beans are ground and then brewed with near-boiling water to produce the beverage known as coffee. Clinical research indicates that moderate coffee consumption is benign or mildly beneficial as a stimulant in healthy adults, with continuing research on whether long-term consumption reduces the risk of some diseases, although those long-term studies are generally of poor quality.", type=str)
-parser_argument.add_argument('--level', default="c", type=str)
-args = parser_argument.parse_known_args()
+def load_parameters(text, level):
+  parser_argument = argparse.ArgumentParser()
 
+  parser_argument.add_argument('--text', default=text, type=str)
+  parser_argument.add_argument('--level', default=level, type=str)
+
+  args = parser_argument.parse_known_args()
+  return args
 
 class LimmersioEngine(Resource):
     def get(self):
-        Reply = 'Hello world!'
         parser.add_argument("text")
         parser.add_argument("level")
         args = parser.parse_args()
-        Reply += ' The text is: ' + args["text"]
-        Reply += ' And the level is: ' + args["level"]
-        #main.limmersify(Reply)
-        return Reply
+
+        args = load_parameters(args["text"], args["level"])
+
+        limmersified_text =  main.limmersify(args[0])
+        return limmersified_text
 
 api.add_resource(LimmersioEngine, '/limmersify/')
 
 if __name__ == "__main__":
-  main.limmersify(args[0])
-  #app.run(debug=True)
+  app.run(debug=True)
+  
 
 
 
