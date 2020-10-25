@@ -10,11 +10,12 @@ api = Api(app)
 
 parser = reqparse.RequestParser()
 
-def load_parameters(text, level):
+def load_parameters(text, level, target_language):
   parser_argument = argparse.ArgumentParser()
 
   parser_argument.add_argument('--text', default=text, type=str)
   parser_argument.add_argument('--level', default=level, type=str)
+  parser_argument.add_argument('--target_language', default=target_language, type=str)
 
   args = parser_argument.parse_known_args()
   return args
@@ -23,9 +24,10 @@ class LimmersioEngine(Resource):
     def get(self):
         parser.add_argument("text")
         parser.add_argument("level")
-        args = parser.parse_args()
+        parser.add_argument("target_language")
 
-        args = load_parameters(args["text"], args["level"])
+        args = parser.parse_args()
+        args = load_parameters(args["text"], args["level"], args["target_language"])
 
         limmersified_text =  main.limmersify(args[0])
         return limmersified_text
