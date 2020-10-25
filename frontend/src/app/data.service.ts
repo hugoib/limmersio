@@ -9,7 +9,7 @@ import { retry, catchError, tap } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://54.157.103.156:5000/limmersify';
+  private REST_API_SERVER = 'http://localhost:5000/limmersify';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,6 +31,7 @@ export class DataService {
       params: {
         text: request.text,
         level: request.level,
+        target_language: request.target_language,
         'Access-Control-Allow-Origin': '*'
       },
       observe: 'response'
