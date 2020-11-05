@@ -88,7 +88,7 @@ def find_word_levels(pairs):
 
 def replace_all(text, dic):
     for i, j in dic.items():
-        text = text.replace(i, j)
+        text = re.sub(r"\b{}\b".format(i), j, text)
     return text
 
 def wrap(string, max_width):
