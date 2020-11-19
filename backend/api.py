@@ -7,6 +7,7 @@ import argparse
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 api = Api(app)
+DEBUG = True
 
 parser = reqparse.RequestParser()
 
@@ -35,7 +36,14 @@ class LimmersioEngine(Resource):
 api.add_resource(LimmersioEngine, '/limmersify/')
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", debug=True)
+  if not DEBUG:
+    app.run(host="0.0.0.0", debug=True)
+  else:
+    text = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. '
+    level = 'a'
+    target_language = 'de'
+    args = load_parameters(text, level, target_language)
+    limmersified_text =  main.limmersify(args[0])
   
 
 

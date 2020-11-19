@@ -95,7 +95,6 @@ def wrap(string, max_width):
     return '\n'.join(textwrap.wrap(string, max_width))
 
 def limmersify_by_level(level, target_language, translator, text, phrases, levelA, levelB, levelC):
-    
     article_length = len(nltk.word_tokenize(text))
     final_text = ''
     if(level == "a"):
@@ -103,6 +102,8 @@ def limmersify_by_level(level, target_language, translator, text, phrases, level
 
         bold_A = []
         for w in selected_A:
+            #Debugging purposes:
+            #time.sleep(1)
             temp = translator.translate(w, src='en', dest=target_language).text
             bold_A.append("<span class='translated-word'>" + temp + "</span>")
 
