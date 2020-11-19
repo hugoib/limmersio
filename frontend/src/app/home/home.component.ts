@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DomSanitizer} from '@angular/platform-browser';
 
-export interface target_language_type {
+export interface TargetLanguageType {
   item: string;
   viewValue: string;
 }
@@ -20,14 +20,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   outputWordAndTranslation = '';
   selectedTargetLanguage = 'de';
   limmersifiedText: any[];
-  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';  
+  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';
   selectedLevelSlider = 1;
   spinnerWait: boolean;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private dataService: DataService, private domSanitizer: DomSanitizer) { }
 
-  target_language_types: target_language_type[] = [
+  targetLanguageTypes: TargetLanguageType[] = [
     {item: 'af', viewValue: 'afrikaans'},
     {item: 'sq', viewValue: 'albanian'},
     {item: 'am', viewValue: 'amharic'},
@@ -185,7 +185,7 @@ prepareWordsAndTranslations(array){
   let wordsAndTranslations = '<br><br><br> Replaced words: <br><br>';
 
   // tslint:disable-next-line: forin
-  for (let words of arrayWithWords){
+  for (const words of arrayWithWords){
     wordsAndTranslations += words.split('++')[1] + ' = ' + words.split('++')[0];
     wordsAndTranslations += '<br>';
   }
