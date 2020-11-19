@@ -17,11 +17,13 @@
                     <textarea class="text-area" matInput [(ngModel)]="inputText">{{inputText}}</textarea>
                   </mat-form-field>
                   <mat-label>Select the target language:   </mat-label>
-                  <mat-select [(ngModel)]="selected_target_language">
+                  <mat-select [(ngModel)]="selectedTargetLanguage">
                       <mat-option *ngFor="let target_language_type of target_language_types" [value]="target_language_type.item">
                           {{ target_language_type.viewValue }}
                       </mat-option>
                   </mat-select>
+                  <br>
+                  <br>
                   <mat-label>Select your language level: (1: Basic, 2: Intermediate, 3: Advanced)</mat-label>
                   <mat-slider class="example-margin" [max]="3" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="selectedLevelSlider">
                   </mat-slider>
@@ -42,6 +44,7 @@
               <br>
               <mat-card-content>
                 <div [innerHtml]="getHtml(outputText)"></div>
+                <div [innerHtml]="getHtml(outputWordAndTranslation)"></div>
               </mat-card-content>
             </mat-card>            
           </div>

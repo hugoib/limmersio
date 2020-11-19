@@ -25,7 +25,8 @@ def limmersify(args):
     final_response = final_text
     final_response += str("&&&")
     for i, j in replaced_words_dic.items():
-        final_response += str(i + '++' + j)
+        final_response += str(i + '++' + j + '--')
+
 
     return final_response
 
@@ -101,14 +102,14 @@ def wrap(string, max_width):
 def limmersify_by_level(level, target_language, translator, text, phrases, levelA, levelB, levelC):
     article_length = len(nltk.word_tokenize(text))
     final_text = ''
+    replaced_words = []
     if(level == "a"):
         selected_A = random.choices(levelA, k=round(0.15 * article_length))
 
         bold_A = []
-        replaced_words = []
         for w in selected_A:
             #Debugging purposes:
-            time.sleep(2)
+            #time.sleep(2)
             temp = translator.translate(w, src='en', dest=target_language).text
             bold_A.append("<span class='translated-word'>" + temp + "</span>")
             replaced_words.append(temp)
@@ -126,7 +127,9 @@ def limmersify_by_level(level, target_language, translator, text, phrases, level
         for w in selected_B:
             temp = translator.translate(w, src='en', dest=target_language).text
             bold_B.append("<span class='translated-word'>" + temp + "</span>")
+            replaced_words.append(temp)
 
+        replaced_words_dic = {k:v for k,v in zip(selected_B, replaced_words)}
         dictB= {k:v for k,v in zip(selected_B, bold_B)}
         final_text = replace_all(text, dictB)
     if(level == "c"):
@@ -139,7 +142,9 @@ def limmersify_by_level(level, target_language, translator, text, phrases, level
         for w in selected_C:
             temp = translator.translate(w, src='en', dest=target_language).text
             bold_C.append("<span class='translated-word'>" + temp + "</span>")
-
+            replaced_words.append(temp)
+        
+        replaced_words_dic = {k:v for k,v in zip(selected_C, replaced_words)}
         dictC = {k:v for k,v in zip(selected_C, bold_C)}
         final_text = replace_all(text, dictC)
 

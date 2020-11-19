@@ -9,7 +9,9 @@ import { retry, catchError, tap } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://54.157.103.156:5000/limmersify';
+  private REST_API_SERVER = 'http://0.0.0.0:5000/limmersify';
+  // Change here for deployment on the AWS Environment
+  // private REST_API_SERVER = 'http://0.0.0.0:5000/limmersify';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -7,7 +7,7 @@ import argparse
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 api = Api(app)
-DEBUG = True
+DEBUG = False
 
 parser = reqparse.RequestParser()
 

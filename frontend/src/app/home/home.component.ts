@@ -17,8 +17,13 @@ export interface target_language_type {
 export class HomeComponent implements OnInit, OnDestroy {
 
   outputText = '';
-  selected_target_language = '';
+  outputWordAndTranslation = '';
+  selectedTargetLanguage = 'de';
   limmersifiedText: any[];
+  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';  
+  selectedLevelSlider = 1;
+  spinnerWait: boolean;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private dataService: DataService, private domSanitizer: DomSanitizer) { }
 
@@ -132,9 +137,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     {item: 'zu', viewValue: 'zulu'}
   ];
 
-  inputText = 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffee species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. ';  selectedLevelSlider = 1;
-  spinnerWait: boolean;
-
   ngOnInit() {
   }
   ngOnDestroy() {
@@ -146,7 +148,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public clear() {
     this.inputText = '';
     this.outputText = '';
-    console.log(this.selected_target_language);
+    this.outputWordAndTranslation = '';
   }
 
   public formJSON() {
@@ -165,7 +167,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const data = '{ ' +
         '"text": "' + newText.replace(/[!@#$^&%*()+=[\]/{}|:<>?,.\\-]/g, '') + '", ' +
         '"level":  "' + level[this.selectedLevelSlider - 1 ] + '", ' +
-        '"target_language":  "' + this.selected_target_language +
+        '"target_language":  "' + this.selectedTargetLanguage +
          '"}';
     const paramsJSON = JSON.parse(data);
     console.log(paramsJSON);
@@ -176,15 +178,32 @@ getHtml(html){
   return this.domSanitizer.bypassSecurityTrustHtml(html);
 }
 
-  public limmersify() {
+prepareWordsAndTranslations(array){
+  console.log(array);
+  const arrayWithWords = array.split('--');
+  arrayWithWords.pop();
+  let wordsAndTranslations = '<br><br><br> Replaced words: <br><br>';
+
+  // tslint:disable-next-line: forin
+  for (let words of arrayWithWords){
+    wordsAndTranslations += words.split('++')[1] + ' = ' + words.split('++')[0];
+    wordsAndTranslations += '<br>';
+  }
+
+  return wordsAndTranslations;
+}
+
+public limmersify() {
     this.spinnerWait = true;
 
     const requestBody = this.formJSON();
-    if (this.inputText !== '' || this.selected_target_language !== ''){
+    if (this.inputText !== '' && this.selectedTargetLanguage !== ''){
       this.dataService.sendGetRequest(requestBody).pipe(takeUntil(this.destroy$)).subscribe(data => {
         this.spinnerWait = false;
         console.log(data);
-        this.outputText = String(data.body);
+        const response = String(data.body).split('&&&');
+        this.outputText = response[0];
+        this.outputWordAndTranslation = this.prepareWordsAndTranslations(response[1]);
       },
         error => {
           this.spinnerWait = false;
@@ -192,7 +211,7 @@ getHtml(html){
     }
     else{
       this.spinnerWait = false;
-      alert('Please insert text and/or select level');
+      alert('Please insert text and/or select target language');
     }
   }
 }
