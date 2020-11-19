@@ -30,8 +30,9 @@ class LimmersioEngine(Resource):
         args = parser.parse_args()
         args = load_parameters(args["text"], args["level"], args["target_language"])
 
-        limmersified_text =  main.limmersify(args[0])
-        return limmersified_text
+        final_response =  main.limmersify(args[0])
+
+        return final_response
 
 api.add_resource(LimmersioEngine, '/limmersify/')
 
@@ -43,7 +44,10 @@ if __name__ == "__main__":
     level = 'a'
     target_language = 'de'
     args = load_parameters(text, level, target_language)
-    limmersified_text =  main.limmersify(args[0])
+
+    final_response =  main.limmersify(args[0])
+
+    print(final_response)
   
 
 

@@ -21,9 +21,13 @@ def limmersify(args):
     pairs = check_nouns_in_dataset(nouns, word_label_dic, word_dict)
     levelA, levelB, levelC = find_word_levels(pairs)
 
-    final_text = limmersify_by_level(args.level, args.target_language, translator, text, phrases, levelA, levelB, levelC)
-    
-    return final_text
+    final_text, replaced_words_dic = limmersify_by_level(args.level, args.target_language, translator, text, phrases, levelA, levelB, levelC)
+    final_response = final_text
+    final_response += str("&&&")
+    for i, j in replaced_words_dic.items():
+        final_response += str(i + '++' + j)
+
+    return final_response
 
 
 def text_cleaning(args):
@@ -101,12 +105,15 @@ def limmersify_by_level(level, target_language, translator, text, phrases, level
         selected_A = random.choices(levelA, k=round(0.15 * article_length))
 
         bold_A = []
+        replaced_words = []
         for w in selected_A:
             #Debugging purposes:
-            #time.sleep(1)
+            time.sleep(2)
             temp = translator.translate(w, src='en', dest=target_language).text
             bold_A.append("<span class='translated-word'>" + temp + "</span>")
+            replaced_words.append(temp)
 
+        replaced_words_dic = {k:v for k,v in zip(selected_A, replaced_words)}
         dictA= {k:v for k,v in zip(selected_A, bold_A)}
         final_text = replace_all(text, dictA)
     if(level == "b"):
@@ -137,7 +144,7 @@ def limmersify_by_level(level, target_language, translator, text, phrases, level
         final_text = replace_all(text, dictC)
 
     print("Final display for user level: " + level + " Text: " + final_text)
-    return final_text
+    return final_text, replaced_words_dic
 
 
 
