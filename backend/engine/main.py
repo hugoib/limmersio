@@ -6,7 +6,6 @@ from googletrans import Translator
 import nltk
 import random
 import re
-from nltk.collocations import *
 import time
 
 def limmersify(args):
