@@ -18,8 +18,8 @@
                   </mat-form-field>
                   <mat-label>Select the target language:   </mat-label>
                   <mat-select [(ngModel)]="selectedTargetLanguage">
-                      <mat-option *ngFor="let TargetLanguageType of targetLanguageTypes" [value]="target_language_type.item">
-                          {{ target_language_type.viewValue }}
+                      <mat-option *ngFor="let TargetLanguageType of targetLanguageTypes" [value]="TargetLanguageType.item">
+                          {{ TargetLanguageType.viewValue }}
                       </mat-option>
                   </mat-select>
                   <br>
